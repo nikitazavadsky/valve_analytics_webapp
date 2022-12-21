@@ -2,11 +2,24 @@
 
 ### Pre-requirements
 
+0. Manage dependencies via poetry
+* Install `poetry`
+
+    ```bash
+    curl -sSL https://install.python-poetry.org | python3 -
+    ```
+* Install dependencies (run in directory with **pyproject.toml**)
+
+    ```bash
+    poetry install
+    ```
+    Read more about `poetry` [here](https://python-poetry.org/docs/cli/)
+
+
 1. Codestyle checks with `pre-commit`
 
-* Install `pre-commit` package using `pip`
 
-    Use the following command on in the root project directory
+* Use the following command on in the root project directory
 
     ```bash
     pre-commit install
