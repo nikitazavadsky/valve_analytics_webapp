@@ -2,29 +2,15 @@
 
 ### Pre-requirements
 
-0. Manage dependencies via poetry
-* Install `poetry`
-
+0. Use the following command in the root project directory
     ```bash
-    curl -sSL https://install.python-poetry.org | python3 -
+    chmod +x install.sh
+    ./install.sh
     ```
-* Install dependencies (run in directory with **pyproject.toml**)
+* `install.sh` script is responsible for
+    - Install poetry
+    - Install project dependencies provided in `pyproject.toml`
+    - Install pre-commit hooks, that will automatically apply linters, described in the
+    `.pre-commit-config.yaml` file, when you'll try to commit your changes
 
-    ```bash
-    poetry install
-    ```
-    Read more about `poetry` [here](https://python-poetry.org/docs/cli/)
-
-
-1. Codestyle checks with `pre-commit`
-
-
-* Use the following command on in the root project directory
-
-    ```bash
-    pre-commit install
-    ```
-
-    It will install pre-commit hooks, that will automatically apply linters, described in the *.pre-commit-config.yaml* file, when you'll try to commit your changes
-
-    Read more about `pre-commit` [here](https://pre-commit.com/)
+Read more about `poetry` [here](https://python-poetry.org/docs/cli/) and about `pre-commit` [here](https://pre-commit.com/)
