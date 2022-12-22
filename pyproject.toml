@@ -4,7 +4,6 @@ version = "0.1.0"
 description = ""
 authors = ["VladGaSik <vlad_ghaykovich@mail.ru>"]
 readme = "README.md"
-packages = [{include = "valve_analytics_webapp"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
