@@ -3,7 +3,6 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 
@@ -11,7 +10,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1"]
 
-MY_APPS: list[str] = []
+MY_APPS: list[str] = [
+    "authentication.apps.AuthenticationConfig",
+]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
@@ -69,7 +70,7 @@ DATABASES = {
         "USER": os.environ.get("POSTGRES_USER"),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
         "HOST": "db",
-        "PORT": 5432,
+        "PORT": os.environ.get("POSTGRES_PORT"),
     }
 }
 
