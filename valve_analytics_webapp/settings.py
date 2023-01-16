@@ -3,12 +3,12 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ["ANALYTICS_WEBAPP_SECRET_KEY"]
 
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = [os.environ["ANALYTICS_WEBAPP_ALLOWED_HOSTS"]]
 
 MY_APPS: list[str] = [
     "authentication.apps.AuthenticationConfig",
@@ -66,11 +66,11 @@ WSGI_APPLICATION = "valve_analytics_webapp.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": os.environ.get("POSTGRES_USER"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
-        "HOST": "db",
-        "PORT": os.environ.get("POSTGRES_PORT"),
+        "NAME": os.environ["ANALYTICS_WEBAPP_DB_NAME"],
+        "USER": os.environ["ANALYTICS_WEBAPP_DB_USER"],
+        "PASSWORD": os.environ["ANALYTICS_WEBAPP_DB_PASSWORD"],
+        "HOST": os.environ["ANALYTICS_WEBAPP_DB_HOST"],
+        "PORT": os.environ["ANALYTICS_WEBAPP_DB_PORT"],
     }
 }
 
