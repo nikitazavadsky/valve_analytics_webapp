@@ -1,33 +1,36 @@
-import os
 from pathlib import Path
+
+import environ
+
+env = environ.Env(smart_cast=True)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = env("VAW_SECRET_KEY")
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+DEBUG = env.bool("DEV", default=False)
 
-
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-MY_APPS = []
-
-THIRD_PARTY_APPS = [
-    "rest_framework",
-]
+ALLOWED_HOSTS = ["*"]
 
 
-INSTALLED_APPS = [
+DJANGO_APPS: list[str] = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    *MY_APPS,
-    *THIRD_PARTY_APPS,
 ]
+
+THIRD_PARTY_APPS = [
+    "rest_framework",
+]
+
+LOCAL_APPS: list[str] = [
+    "authentication.apps.AuthenticationConfig",
+]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"]}
 
@@ -64,8 +67,12 @@ WSGI_APPLICATION = "valve_analytics_webapp.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": env("VAW_DATABASE_NAME"),
+        "USER": env("VAW_DATABASE_USER"),
+        "PASSWORD": env("VAW_DATABASE_PASS"),
+        "HOST": env("VAW_DATABASE_HOST"),
+        "PORT": env("VAW_DATABASE_PORT"),
     }
 }
 

@@ -1,0 +1,29 @@
+version: "3.9"
+
+volumes:
+  postgres_data:
+  virtualenv_cache:
+
+services:
+  web:
+    build:
+      context: ./provision/docker/backend/local
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - virtualenv_cache:/data/pypoetry
+      - ./valve_analytics_webapp:/srv/http
+    env_file:
+      - .environment/local/app
+    ports:
+      - "8000:8080"
+
+  db:
+    image: postgres:15.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "3432:5432"
+    env_file:
+      - .environment/local/db
